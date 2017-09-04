@@ -8,7 +8,7 @@
         placeholder='Search for country',
         autocomplete='off',
         @keyup='keyupEvent',
-        @focus='$event.target.value = ""',
+        @focus='focus',
         autofocus
       )
       ul#results(v-show='results.length')
@@ -37,6 +37,9 @@ export default {
     }
   },
   methods: {
+    focus (e) {
+      this.countryField = e.target.value = ''
+    },
     selectItem (e) {
       this.countryField = e.target.innerText
     },
@@ -53,12 +56,16 @@ export default {
 
         if (e.keyCode === 40 && current) {
           next = current.nextElementSibling || items[0]
+          e.target.value = next.innerText
         } else if (e.keyCode === 40) {
           next = items[0]
+          e.target.value = next.innerText
         } else if (e.keyCode === 38 && current) {
           next = current.previousElementSibling || items[items.length - 1]
+          e.target.value = next.innerText
         } else if (e.keyCode === 38) {
           next = items[items.length - 1]
+          e.target.value = next.innerText
         } else if (e.keyCode === 13) {
           if (current && current.innerText) {
             this.countryField = e.target.value = current.innerText
@@ -79,6 +86,8 @@ export default {
       }
     },
     addToList () {
+      if (!this.results.length) return
+
       if (this.countryField) {
         bus.$emit('items', {
           name: this.countryField,
@@ -97,12 +106,16 @@ export default {
       const countryField = document.getElementById('textInput')
       const service = new google.maps.places.AutocompleteService() // eslint-disable-line
       service.getQueryPredictions({ input: countryField.value }, (predictions, status) => {
+        if (status !== 'OK') {
+          this.countryField = ''
+          console.warn('Oops, the request failed because of zero results')
+          return
+        }
+
         predictions.map(prediction => {
-          try {
-            if (prediction.types.includes('country')) {
-              this.results.unshift(prediction.description)
-            }
-          } catch (e) { }
+          if (prediction.types.includes('country')) {
+            this.results.unshift(prediction.description)
+          }
         })
       })
     },
