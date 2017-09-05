@@ -3,10 +3,10 @@
     span.item--name {{ item.name }}
     .item--icons
       img.item--icon.trash(
-        :src='require("../assets/trash.svg")'
+        :src='require("@/assets/trash.svg")'
         @click='removeItem(item)'
         v-show='focus || mobileKeepAlive'
-        v-if='removable'
+        v-if='!isFavourite'
       )
       img.item--icon.star(
         :src='getStarLink(item)'
@@ -31,7 +31,7 @@ export default {
       required: true
     },
     index: Number,
-    removable: Boolean
+    isFavourite: Boolean
   },
   computed: {
     mobileKeepAlive () {
@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     getStarLink (item) {
-      return item.favourite ? require('../assets/star.svg') : require('../assets/star-empty.svg')
+      return item.favourite ? require('@/assets/star.svg') : require('@/assets/star-empty.svg')
     },
     removeItem (item) {
       bus.$emit('itemToRemove', this.item)

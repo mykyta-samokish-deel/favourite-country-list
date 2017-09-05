@@ -16,19 +16,20 @@
           | My favorites
           img.header--star(:src='require("@/assets/star.svg")')
       main
-        country-list(:items='favouritedList' :removable='false')
+        country-list(:items='list' :isFavourite='true')
 </template>
 
 <script>
-import SearchInput from '@/components/SearchInput'
-import CountryList from '@/components/CountryList'
 import bus from '@/bus'
 
 const itemInArray = (arr, item) => arr.some(i => i.name === item.name)
 
 export default {
   name: 'app',
-  components: { SearchInput, CountryList },
+  components: {
+    SearchInput: () => import('@/components/SearchInput'),
+    CountryList: () => import('@/components/CountryList')
+  },
   data () {
     return {
       list: [],
@@ -73,7 +74,7 @@ export default {
       if (newVal.length > 10) this.hasNext = true
       if (newVal.length < 11) this.hasNext = false
 
-      const newElem = newVal[newVal.length - 1]
+      const newElem = newVal[0]
       if (!itemInArray(oldVal, newElem)) {
         console.log(`A new element added: ${newElem.name}.`)
       }

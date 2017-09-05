@@ -1,33 +1,37 @@
 <template lang="pug">
   transition-group(name='list' tag='ul' v-if='items.length')
-    country-item(v-for='item in items' :key='item.name' :item='item' :removable='removable')
+    country-item(v-for='item in definedList' :key='item.name' :item='item' :isFavourite='isFavourite')
 </template>
 
 <script>
-import CountryItem from './CountryItem'
-
 export default {
   name: 'country-list',
   components: {
-    CountryItem
+    CountryItem: () => import('./CountryItem')
   },
   props: {
     items: {
       type: Array,
       required: true
     },
-    removable: {
+    isFavourite: {
       type: Boolean,
-      default: true
+      default: false
+    }
+  },
+  computed: {
+    definedList () {
+      return this.isFavourite ? this.items.filter(i => i.favourite) : this.items
     }
   },
   beforeCreate () {
     console.log('CountryList.vue has started loading!')
-    console.time('CountryList.vue loaded!')
   },
   mounted () {
+    const randomItem = Math.random().toString().substr(2, 3)
+    console.time(`CountryList.vue ${randomItem} finished loading`)
     this.$nextTick(() => {
-      console.timeEnd('CountryList.vue loaded!')
+      console.timeEnd(`CountryList.vue ${randomItem} finished loading`)
     })
   }
 }
