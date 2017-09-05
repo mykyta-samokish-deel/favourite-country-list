@@ -12,9 +12,8 @@
 
     .container
       header
-        h1
-          | My favorites
-          img.header--star(:src='require("@/assets/star.svg")')
+        h1 My favorites
+        img.header--star(:src='require("@/assets/star.svg")')
       main
         country-list(:items='list' :isFavourite='true')
 </template>
