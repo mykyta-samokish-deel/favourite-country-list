@@ -2,14 +2,21 @@
   #app
     .container
       header
-        h1 {{ $route.name }}
-        router-link.button(to='/favourite' v-if='isRoot') Favs
-        router-link.button(to='/' v-else) Home
+        h1 My countries
       search-input(v-if='isRoot')
-      country-list(:items='paginate(filteredList)')
+      main
+        country-list(:items='paginate(filteredList)')
       .pagination
         a.button(@click='prevPage()' :style="toggleButtonColorState(hasPrev)") Previous Page
         a.button(@click='nextPage()' :style="toggleButtonColorState(hasNext)") Next Page
+
+    .container
+      header
+        h1
+          | My favorites
+          img.header--star(:src='require("@/assets/star.svg")')
+      main
+        country-list(:items='favouritedList' :removable='false')
 </template>
 
 <script>
@@ -115,17 +122,24 @@ export default {
   padding 0
 
 #app
+  display flex
   font-family 'Neue', Helvetica, Arial, sans-serif
-  background-color #fff
-  margin 50px
+  background-color #ededed
+  height 100vh
+  width 100vw
 
 .container
   display flex
-  flex 0
   flex-direction column
-  background-color inherit
+  background-color #ffffff
   box-shadow 0 1px 8px 0 rgba(0, 0, 0, 0.1)
   width 435px
+  height 588px
+  margin 20px
+
+main
+  flex 1
+  display flex
 
 header
   display flex
@@ -140,12 +154,17 @@ header
     font-weight 500
     color black
 
+  .header--star
+    margin-left 10px
+    width 29.4px
+    height 28px
+
 .pagination
   display flex
+  height 70px
   justify-content space-between
-  align-items center
-  padding 24px
-  padding-top 0
+  align-items flex-start
+  padding 0 24px
 
 .button
   cursor pointer

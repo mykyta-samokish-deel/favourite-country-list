@@ -178,22 +178,24 @@ export default {
   display flex
   flex-direction column
   align-items stretch
-  flex 1 1 100%
   box-shadow rgba(0, 0, 0, 0.3) 0px 2px 6px 0px
   top 36px
   background-color white
+  width 100%
 
 .search__result
   list-style none
   background-color inherit
-  border-bottom 1px solid black
+  border-bottom 1px solid #ededed
+  box-shadow rgba(0, 0, 0, 0.3) 0px 2px 6px 0px
   padding 8px 10px
+  width 100%
   transition background-color 150ms
 
   &:hover
-    background-color lighten(grey, 40%)
+    background-color lighten(#ededed, 40%)
 
 .search__result--active
-  background-color lighten(grey, 40%)
+  background-color lighten(#ededed, 40%)
 
 </style>

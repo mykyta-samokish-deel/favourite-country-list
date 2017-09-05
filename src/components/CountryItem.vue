@@ -6,7 +6,7 @@
         :src='require("../assets/trash.svg")'
         @click='removeItem(item)'
         v-show='focus || mobileKeepAlive'
-        v-if='$route.path === "/"'
+        v-if='removable'
       )
       img.item--icon.star(
         :src='getStarLink(item)'
@@ -30,7 +30,8 @@ export default {
       type: Object,
       required: true
     },
-    index: Number
+    index: Number,
+    removable: Boolean
   },
   computed: {
     mobileKeepAlive () {
@@ -64,8 +65,8 @@ export default {
   justify-content space-between
   background-color inherit
   transition background-color 400ms
-  padding 8px 24px
-  min-height 36px
+  padding 0 24px
+  height 36px
 
   &:hover
     background-color rgba(0, 0, 0, 0.05)
