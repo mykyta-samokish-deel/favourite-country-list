@@ -3,9 +3,9 @@
     .container
       header
         h1 My countries
-      search-input(v-if='isRoot')
+      search-input
       main
-        country-list(:items='paginate(filteredList)')
+        country-list(:items='paginate(list)')
       .pagination
         a.button(@click='prevPage()' :style="toggleButtonColorState(hasPrev)") Previous Page
         a.button(@click='nextPage()' :style="toggleButtonColorState(hasNext)") Next Page
@@ -38,18 +38,12 @@ export default {
     }
   },
   computed: {
-    isRoot () {
-      return this.$route.path === '/'
-    },
     favouritedList () {
       return this.list.filter(i => i.favourite)
     },
-    filteredList () {
-      return this.isRoot ? this.list : this.favouritedList
-    },
     pagesAmount () {
-      if (!this.filteredList.length) return 1
-      return Math.ceil(this.filteredList.length / 10)
+      if (!this.list.length) return 1
+      return Math.ceil(this.list.length / 10)
     }
   },
   methods: {
@@ -69,10 +63,6 @@ export default {
     }
   },
   watch: {
-    '$route' (to, from) {
-      if (to !== from) this.currentPage = 0
-      this.hasNext = this.currentPage !== this.pagesAmount - 1
-    },
     currentPage (n, o) {
       this.hasPrev = n !== 0
       this.hasNext = n !== this.pagesAmount - 1
@@ -123,6 +113,8 @@ export default {
 
 #app
   display flex
+  align-items center
+  justify-content center
   font-family 'Neue', Helvetica, Arial, sans-serif
   background-color #ededed
   height 100vh
