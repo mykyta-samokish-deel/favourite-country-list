@@ -2,14 +2,13 @@
   #app
     .container
       header
-        span {{ $route.name }}: {{ filteredList.length }}
+        h1 {{ $route.name }}
         router-link.button(to='/favourite' v-if='isRoot') Favs
         router-link.button(to='/' v-else) Home
       search-input(v-if='isRoot')
       country-list(:items='paginate(filteredList)')
       .pagination
         a.button(@click='prevPage()' :style="toggleButtonColorState(hasPrev)") Previous Page
-        span page {{ currentPage + 1 }}/{{ pagesAmount }}
         a.button(@click='nextPage()' :style="toggleButtonColorState(hasNext)") Next Page
 </template>
 
@@ -117,43 +116,29 @@ export default {
 
 #app
   font-family 'Neue', Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  color #2c3e50
-  display flex
-  flex-direction column
-  background-color white
-  margin 0 auto
-  width 100%
+  background-color #fff
+  margin 50px
 
 .container
   display flex
+  flex 0
   flex-direction column
   background-color inherit
-
-  @media (min-width:801px)
-    width 60vw
-    margin 50px auto
+  box-shadow 0 1px 8px 0 rgba(0, 0, 0, 0.1)
+  width 435px
 
 header
   display flex
   align-items center
   justify-content space-between
-  padding 24px
-  padding-bottom 16px
   background-color inherit
-  color black
-  font-weight 500
+  margin 24px
+  margin-bottom 16px
 
-  span
-    display block
-    position relative
+  h1
     font-size 32px
-    font-size 5.9vw
-    line-height 1
-    letter-spacing .02em
     font-weight 500
-    box-sizing border-box
+    color black
 
 .pagination
   display flex
@@ -161,9 +146,6 @@ header
   align-items center
   padding 24px
   padding-top 0
-
-  span
-    text-align center
 
 .button
   cursor pointer

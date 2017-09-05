@@ -1,23 +1,24 @@
 <template lang="pug">
   transition(name='slidey')
-    div.input-field(style='position: relative')
-      input#textInput(
-        type='text',
-        name='textInput',
-        v-model='countryField',
-        placeholder='Search for country',
-        autocomplete='off',
-        @keyup='keyupEvent',
-        @focus='focus',
-        autofocus
-      )
-      ul#results(v-show='results.length')
-        li.search__result(
-          v-for='result in filteredResults'
-          :key='result'
-          @click='selectItem'
-        ) {{ result }}
-      button.addCountry(@click.prevent='addToList') Add
+    .input-form
+      .input-field(style='position: relative')
+        input#textInput(
+          type='text',
+          name='textInput',
+          v-model='countryField',
+          placeholder='Search for country',
+          autocomplete='off',
+          @keyup='keyupEvent',
+          @focus='focus',
+          autofocus
+        )
+        ul#results(v-show='results.length')
+          li.search__result(
+            v-for='result in filteredResults'
+            :key='result'
+            @click='selectItem'
+          ) {{ result }}
+      button.addCountry(@click.prevent='addToList') Add +
 </template>
 
 <script>
@@ -86,8 +87,6 @@ export default {
       }
     },
     addToList () {
-      if (!this.results.length) return
-
       if (this.countryField) {
         bus.$emit('items', {
           name: this.countryField,
@@ -113,9 +112,10 @@ export default {
         }
 
         predictions.map(prediction => {
-          if (prediction.types.includes('country')) {
+          if (prediction.hasOwnProperty('types') && prediction.types.includes('country')) {
             this.results.unshift(prediction.description)
           }
+          return null
         })
       })
     },
@@ -136,24 +136,21 @@ export default {
 </script>
 
 <style lang="styl" scoped>
-.input-field
+.input-form
   display flex
   justify-content space-between
   margin 0 24px
   margin-bottom 8px
 
-  input[type=text]
-    flex 1
-    font-size 18px
-    margin-right 1em
-    height 2em
-    background-color #ededed
-    border 0
-    padding 0 .66em
-
-    @media screen and (max-width: 800px)
-      flex 0
-      max-width 50vw
+  .input-field
+    input[type=text]
+      width 100%
+      font-size 18px
+      margin-right 1em
+      height 2em
+      background-color #ededed
+      border 0
+      padding 0 .66em
 
 .addCountry
   cursor pointer

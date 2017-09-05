@@ -62,7 +62,6 @@ export default {
   display flex
   align-items center
   justify-content space-between
-  list-style none
   background-color inherit
   transition background-color 400ms
   padding 8px 24px
@@ -73,6 +72,7 @@ export default {
 
 .item--name
   font-size 18px
+  line-height 1.11em
   color #4a4a4a
 
 .item--icon:nth-child(2)
