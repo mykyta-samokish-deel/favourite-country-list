@@ -46,9 +46,7 @@ export default {
     },
     keyupEvent (e) {
       try {
-        if (![38, 40, 13].includes(e.keyCode)) {
-          return
-        }
+        if (![38, 40, 13].includes(e.keyCode)) return
 
         const activeClass = 'search__result--active'
         const current = document.querySelector(`.${activeClass}`)
@@ -82,9 +80,7 @@ export default {
           current.classList.remove(activeClass)
         }
         next.classList.add(activeClass)
-      } catch (e) {
-        console.warn('Apparently, you clicked "Enter" while the text input was empty.')
-      }
+      } catch (e) { /* Error handling goes here */ }
     },
     addToList () {
       if (this.countryField) {

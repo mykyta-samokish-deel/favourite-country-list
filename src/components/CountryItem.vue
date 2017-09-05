@@ -5,13 +5,13 @@
       img.item--icon.trash(
         :src='require("@/assets/trash.svg")'
         @click='removeItem(item)'
-        v-show='focus || mobileKeepAlive'
+        v-show='focus'
         v-if='!isFavourite'
       )
       img.item--icon.star(
         :src='getStarLink(item)'
         @click='addToFavourites(item)'
-        v-show='item.favourite || focus || mobileKeepAlive'
+        v-show='item.favourite || focus'
       )
 </template>
 
@@ -33,11 +33,6 @@ export default {
     index: Number,
     isFavourite: Boolean
   },
-  computed: {
-    mobileKeepAlive () {
-      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-    }
-  },
   methods: {
     getStarLink (item) {
       return item.favourite ? require('@/assets/star.svg') : require('@/assets/star-empty.svg')
@@ -54,6 +49,15 @@ export default {
       }
       console.log(`Item excluded from favourites: ${item.name}`)
     }
+  },
+  beforeCreate () {
+    console.log('CountryItem.vue has started loading!')
+    console.time('CountryItem.vue loaded!')
+  },
+  mounted () {
+    this.$nextTick(() => {
+      console.timeEnd('CountryItem.vue loaded!')
+    })
   }
 }
 </script>

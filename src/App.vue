@@ -91,6 +91,7 @@ export default {
     })
 
     bus.$on('itemToRemove', i => {
+      this.$set(i, 'favourite', false)
       const itemIndex = this.list.findIndex(item => i.name === item.name)
       this.list.splice(itemIndex, 1)
     })
@@ -135,8 +136,7 @@ main
 
 header
   display flex
-  align-items center
-  justify-content space-between
+  align-items flex-start
   background-color inherit
   margin 24px
   margin-bottom 16px
