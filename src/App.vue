@@ -63,20 +63,23 @@ export default {
     }
   },
   watch: {
-    currentPage (n, o) {
-      this.hasPrev = n !== 0
-      this.hasNext = n !== this.pagesAmount - 1
-    },
     list (newVal, oldVal) {
       if (!newVal.length) return
 
-      if (newVal.length > 10) this.hasNext = true
-      if (newVal.length < 11) this.hasNext = false
+      if (newVal.length > 10 && this.currentPage < (this.pagesAmount - 1)) this.hasNext = true
+      if (newVal.length < 11) {
+        this.currentPage = 0
+        this.hasNext = false
+      }
 
       const newElem = newVal[0]
       if (!itemInArray(oldVal, newElem)) {
         console.log(`A new element added: ${newElem.name}.`)
       }
+    },
+    currentPage (n) {
+      this.hasPrev = n !== 0
+      this.hasNext = n !== (this.pagesAmount - 1)
     }
   },
   beforeCreate () {
