@@ -1,6 +1,9 @@
 <template lang="pug">
-  transition-group(name='list' tag='ul' v-if='items.length')
-    country-item(v-for='item in definedList' :key='item.name' :item='item' :isFavourite='isFavourite')
+  transition-group.country-list(v-if='items.length'
+    :class='isFavourite && "fav"'
+    tag='ul'
+    name='list'
+  ): country-item(v-for='item in definedList' :key='item.name' :item='item' :isFavourite='isFavourite')
 </template>
 
 <script>
@@ -38,10 +41,13 @@ export default {
 </script>
 
 <style lang="styl" scoped>
-ul
+.country-list
   flex 1 0 100%
   background-color inherit
   width 100%
+
+.fav
+  margin-top -8px
 
 .list-enter-active, .list-leave-active
   transition all .5s

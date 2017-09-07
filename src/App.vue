@@ -119,7 +119,7 @@ export default {
   display flex
   align-items center
   justify-content center
-  font-family HelveticaNeue, Arial, sans-serif
+  font-family 'Helvetica Neue', Arial, sans-serif
   background-color #fafafa
   height 100vh
   width 100vw
