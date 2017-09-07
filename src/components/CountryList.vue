@@ -40,7 +40,6 @@ export default {
 <style lang="styl" scoped>
 ul
   flex 1 0 100%
-  margin-top 20px
   background-color inherit
   width 100%
 
@@ -49,5 +48,5 @@ ul
 
 .list-enter, .list-leave-to
   opacity 0
-  transform translateX(-500px)
+  transform translateX(-2000px)
 </style>

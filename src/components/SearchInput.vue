@@ -1,10 +1,9 @@
 <template lang="pug">
   transition(name='slidey')
     .input-form
-      .input-field(style='position: relative')
+      .input-field
         input#textInput(
           type='text',
-          name='textInput',
           v-model='countryField',
           placeholder='Search for country',
           autocomplete='off',
@@ -136,32 +135,41 @@ export default {
   display flex
   justify-content space-between
   margin 0 24px
-  margin-bottom 8px
+  margin-bottom 20px
 
   .input-field
+    background-color inherit
+    position relative
+    display flex
+    flex 1
+
     input[type=text]
-      width 100%
+      flex 1 0
       font-size 18px
       border-radius 4px
-      margin-right 1em
+      margin-right 18px
       height 2em
       background-color #ededed
+      color #4a4a4a
       border 0
       padding 0 .66em
+
+      &::placeholder
+        color #a6a6a6
 
 .addCountry
   cursor pointer
   border-radius 4px
-  padding 8px 16px
+  padding 8px 12px
   font-size 18px
-  line-height 1.11em
+  line-height 1.11
   color white
-  background-color rgba(73, 144, 226, 0.8)
+  background-color #4990e2
   border-width 0
   transition background-color 250ms
 
   &:hover
-    background-color rgba(73, 144, 226, 1)
+    background-color darken(#4990e2, 15%)
 
 .slidey-enter-active, .slidey-leave-active
   transition transform .5s
@@ -175,10 +183,12 @@ export default {
   display flex
   flex-direction column
   align-items stretch
+  width calc(100% - 38px)
   box-shadow rgba(0, 0, 0, 0.3) 0px 2px 6px 0px
+  border-radius 4px
   top 36px
+  left 0
   background-color white
-  width 100%
 
 .search__result
   list-style none

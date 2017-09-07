@@ -7,8 +7,8 @@
       main
         country-list(:items='paginate(list)')
       .pagination
-        a.button(@click='prevPage()' :style="toggleButtonColorState(hasPrev)") Previous Page
-        a.button(@click='nextPage()' :style="toggleButtonColorState(hasNext)") Next Page
+        a.paginator(@click='prevPage()' :style="toggleButtonColorState(hasPrev)") Previous Page
+        a.paginator(@click='nextPage()' :style="toggleButtonColorState(hasNext)") Next Page
 
     .container
       header
@@ -119,8 +119,8 @@ export default {
   display flex
   align-items center
   justify-content center
-  font-family 'Neue', Helvetica, Arial, sans-serif
-  background-color #ededed
+  font-family HelveticaNeue, Arial, sans-serif
+  background-color #fafafa
   height 100vh
   width 100vw
 
@@ -129,6 +129,7 @@ export default {
   flex-direction column
   background-color #ffffff
   box-shadow 0 1px 8px 0 rgba(0, 0, 0, 0.1)
+  border-radius 2px
   width 435px
   height 588px
   margin 20px
@@ -161,23 +162,18 @@ header
   align-items flex-start
   padding 0 24px
 
-  a
+  .paginator
+    text-decoration none
+    cursor pointer
     font-size 16px
-    line-height 1.12em
+    line-height 1.12
+    padding 6px 10px
+    color white
+    background-color #4990e2
+    border-radius 4px
+    border-width 0
+    transition background-color 250ms
 
-.button
-  cursor pointer
-  text-decoration none
-  border-radius 4px
-  padding 8px 12px
-  font-size 18px
-  line-height 20px
-  color white
-  background-color rgba(73, 144, 226, 0.8)
-  border-width 0
-  transition background-color 250ms
-
-  &:hover
-    background-color rgba(73, 144, 226, 1)
-
+    &:hover
+      background-color darken(#4990e2, 15%)
 </style>

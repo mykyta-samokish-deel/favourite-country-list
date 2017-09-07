@@ -94,23 +94,27 @@ export default {
     & .in-fav-list
       fill #a6a6a6
 
-.item--name
-  font-size 18px
-  line-height 1.11em
-  color #4a4a4a
+  .item--name
+    font-size 18px
+    line-height 1.11
+    color #4a4a4a
 
-.item--icon
-  cursor pointer
+  .item--icons
+    display flex
+    align-items center
 
-  &:nth-child(2)
-    margin-left 16.6px
+  .item--icon
+    cursor pointer
 
-.trash
-  width 13.4px
-  height 18px
+    &:nth-child(2)
+      margin-left 16.6px
 
-.star
-  width 21px
-  height 20px
+  .trash
+    width 13.4px
+    height 18px
+
+  .star
+    width 21px
+    height 20px
 
 </style>
