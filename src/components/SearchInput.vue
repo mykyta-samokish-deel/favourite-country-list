@@ -142,6 +142,7 @@ export default {
     input[type=text]
       width 100%
       font-size 18px
+      border-radius 4px
       margin-right 1em
       height 2em
       background-color #ededed
@@ -151,7 +152,7 @@ export default {
 .addCountry
   cursor pointer
   border-radius 4px
-  padding 8px 12px
+  padding 8px 16px
   font-size 18px
   line-height 20px
   color white

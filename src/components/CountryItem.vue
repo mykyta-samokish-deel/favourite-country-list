@@ -80,8 +80,11 @@ export default {
   line-height 1.11em
   color #4a4a4a
 
-.item--icon:nth-child(2)
-  margin-left 16.6px
+.item--icon
+  cursor pointer
+
+  &:nth-child(2)
+    margin-left 16.6px
 
 .trash
   width 13.4px

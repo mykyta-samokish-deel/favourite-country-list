@@ -139,7 +139,7 @@ main
 
 header
   display flex
-  align-items flex-start
+  align-items center
   background-color inherit
   margin 24px
   margin-bottom 16px
@@ -160,6 +160,10 @@ header
   justify-content space-between
   align-items flex-start
   padding 0 24px
+
+  a
+    font-size 16px
+    line-height 1.12em
 
 .button
   cursor pointer
