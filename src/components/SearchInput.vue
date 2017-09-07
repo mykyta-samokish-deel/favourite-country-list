@@ -6,7 +6,7 @@
           type='text',
           v-model='countryField',
           placeholder='Search for country',
-          autocomplete='off',
+          autocomplete='nope',
           @keyup='keyupEvent',
           @focus='focus',
           autofocus
@@ -42,6 +42,7 @@ export default {
     },
     selectItem (e) {
       this.countryField = e.target.innerText
+      this.results = []
     },
     keyupEvent (e) {
       try {
@@ -72,6 +73,7 @@ export default {
               favourite: false
             })
           }
+          this.countryField = e.target.value = ''
           return
         }
 
@@ -81,13 +83,14 @@ export default {
         next.classList.add(activeClass)
       } catch (e) { /* Error handling goes here */ }
     },
-    addToList () {
+    addToList (e) {
       if (this.countryField) {
         bus.$emit('items', {
           name: this.countryField,
           favourite: false
         })
       }
+      this.countryField = e.target.value = ''
     }
   },
   watch: {
