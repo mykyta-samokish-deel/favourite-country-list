@@ -154,7 +154,7 @@ export default {
   border-radius 4px
   padding 8px 16px
   font-size 18px
-  line-height 20px
+  line-height 1.11em
   color white
   background-color rgba(73, 144, 226, 0.8)
   border-width 0
