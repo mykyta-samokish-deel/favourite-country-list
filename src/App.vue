@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import SearchInput from '@/components/SearchInput'
+import CountryList from '@/components/CountryList'
 import bus from '@/bus'
 
 const itemInArray = (arr, item) => arr.some(i => i.name === item.name)
@@ -26,8 +28,8 @@ const itemInArray = (arr, item) => arr.some(i => i.name === item.name)
 export default {
   name: 'app',
   components: {
-    SearchInput: () => import('@/components/SearchInput'),
-    CountryList: () => import('@/components/CountryList')
+    SearchInput,
+    CountryList
   },
   data () {
     return {

@@ -7,10 +7,12 @@
 </template>
 
 <script>
+import CountryItem from './CountryItem'
+
 export default {
   name: 'country-list',
   components: {
-    CountryItem: () => import('./CountryItem')
+    CountryItem
   },
   props: {
     items: {
